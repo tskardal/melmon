@@ -1,1 +1,6 @@
 //Todo
+
+- read URLs from a file
+- check the state of each of these URLs each nth millisecond
+- create a GET method that returns json with state of all URLs. this should be used initially.
+- get updates by websocket events
