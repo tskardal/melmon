@@ -1,0 +1,9 @@
+{
+    "name": "melmon",
+    "description": "A simple service status monitor",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "*",
+        "socket.io": "*"
+    }
+}

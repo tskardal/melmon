@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <title>melmon 0.0.1</title>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <script>
+          var socket = io.connect('http://localhost');
+          socket.on('w00t', function (data) {
+            var p = document.createElement('p');
+            p.innerHTML = data.msg;
+            document.getElementById('log').appendChild(p);
+          });
+          var send = function () {
+              socket.emit('jiha', {msg: document.forms['chat'].elements['message'].value});
+          };
+        </script>
+        <form name="chat">
+            <fieldset>
+                <label for="message" value="Message:" />
+                <input type="text" name="message" />
+                <input type="button" value="Send" onclick="send()" />
+            </fieldset>
+        </form>
+        <div id="log">
+        </div>
+    </body>
+</html>
+
