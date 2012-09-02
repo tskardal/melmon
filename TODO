@@ -1,5 +1,6 @@
 todo:
 ``````````````````````````
+- display status in index.html
 - get updates by websocket events
 - add https support
 
