@@ -1,8 +1,9 @@
 var app = require('express')();
-var http = require('http')
+var http = require('http');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-var fs = require('fs')
+var fs = require('fs');
+var url = require('url');
 
 server.listen(1337);
 
@@ -23,12 +24,17 @@ io.sockets.on('connection', function(socket) {
     });
 });
 
-function checkStatus(url) {
-    http.get(url, function(res) {
-        status[url] = res.statusCode;               
-        //console.log("Status: \n" + JSON.stringify(status));
+function checkStatus(host) {
+    http.get(host, function(res) {
+        if (res.statusCode == 301) {
+            var redirect = res.headers.location;
+            console.log("redirect: " + redirect);
+            checkStatus(redirect);
+        } else {
+            status[host] = res.statusCode;               
+        }
     }).on('error', function(e) {
-        console.log("URL: " + url);
+        console.log("URL: " + host);
         console.log("Got error: " + e.message);
     }); 
 }
