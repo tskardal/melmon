@@ -1,5 +1,6 @@
 var app = require('express')();
 var http = require('http');
+var https = require('https');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
@@ -25,10 +26,15 @@ io.sockets.on('connection', function(socket) {
 });
 
 function checkStatus(host) {
-    http.get(host, function(res) {
+    var parsed = url.parse(host);
+    var mode = http;
+    if (parsed.protocol == 'https:') {
+        mode = https;
+    }
+    mode.get({host: parsed.host, path: parsed.path}, function(res) {
         if (res.statusCode == 301) {
             var redirect = res.headers.location;
-            console.log("redirect: " + redirect);
+            console.log("redirect: " + host + " --> " + redirect);
             checkStatus(redirect);
         } else {
             status[host] = res.statusCode;               
@@ -39,11 +45,14 @@ function checkStatus(host) {
     }); 
 }
 
-setInterval(function() {
+function readConfig() {
     fs.readFile(__dirname + '/settings.txt', 'utf-8', function(err, data) {
         var services = data.split('\n');
         for (var i=0; i < services.length - 1; i++) {
            checkStatus(services[i]); 
         }
     });
-}, 1000);
+}
+readConfig();
+setInterval(readConfig, 15000);
+
