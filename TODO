@@ -1,6 +1,7 @@
 todo:
 ``````````````````````````
 - display status in index.html
+- use Bootstrap for styling
 - get updates by websocket events
 
 complete:
