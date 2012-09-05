@@ -1,6 +1,5 @@
 todo:
 ``````````````````````````
-- display status in index.html
 - use Bootstrap for styling
 - get updates by websocket events
 
@@ -11,3 +10,4 @@ complete:
 - create a GET method that returns json with state of all URLs. this should be used initially.
 - handle redirects
 - add https support
+- display status in index.html
