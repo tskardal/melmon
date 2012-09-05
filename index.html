@@ -16,25 +16,21 @@
               socket.emit('jiha', {msg: document.forms['chat'].elements['message'].value});
           };
 
-          function getStatus(){
+          (function (){
               var r = new XMLHttpRequest();
               r.open("GET", "status", true);
               r.onreadystatechange = function () {
                   if (r.readyState != 4 || r.status != 200) return; 
-                  var data = JSON.parse(r.responseText);
-                  alert('data: ' + data);
-                  function onData(data){
+                  (function (data){
                     for(var key in data) {
                       var p = document.createElement('p');
                       p.innerHTML = key + ' :: ' + data[key];
                       document.getElementById("status").appendChild(p);
                     }
-                  };
-                  onData(data);
+                  })(JSON.parse(r.responseText));
             };
             r.send();
-          };
-          getStatus();
+          })();
         </script>
         <form name="chat">
             <fieldset>
