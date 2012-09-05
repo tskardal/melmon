@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 app.get('/status', function (req, res) {
-    res.send(JSON.stringify(status));
+    res.end(JSON.stringify(status));
 });
 
 io.sockets.on('connection', function(socket) {
