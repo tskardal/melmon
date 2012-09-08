@@ -2,21 +2,25 @@
 <html>
     <head>
         <title>melmon 0.0.1</title>
-        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="/public/css/bootstrap.css" type="text/css" media="screen" charset="utf-8"/>
         <link rel="stylesheet" href="/public/css/screen.css" type="text/css" media="screen" charset="utf-8"/>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/public/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
         <script src="/public/js/melmon.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <form name="chat">
-            <fieldset>
-                <label for="message" value="Message:" />
-                <input type="text" name="message" />
-                <input type="button" value="Send" name="send" />
-            </fieldset>
-        </form>
-        <div id="log">
-        </div>
-        <div id="status">
+        <div id="main" class="well">
+            <form name="chat">
+                <fieldset>
+                    <label for="message" value="Message:" />
+                    <input type="text" name="message" />
+                    <input type="button" value="Send" name="send" />
+                </fieldset>
+            </form>
+            <div id="log">
+            </div>
+            <div id="status">
+            </div>
         </div>
     </body>
 </html>

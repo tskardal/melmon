@@ -6,7 +6,14 @@ document.addEventListener('DOMContentLoaded', function () {
         (function (data){
             for(var key in data) {
                 var p = document.createElement('p');
-                p.innerHTML = key + ' :: ' + data[key];
+                p.innerHTML = key;
+                p.classList.add('well-small');
+                var state = document.createElement('span');
+                state.innerHTML = data[key];
+                state.classList.add('label');
+                state.classList.add('label-info');
+                state.classList.add('state');
+                p.appendChild(state);
                 document.getElementById("status").appendChild(p);
             }
         })(JSON.parse(r.responseText));
