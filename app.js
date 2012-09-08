@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http');
 var https = require('https');
 var server = http.createServer(app);
@@ -11,6 +12,7 @@ server.listen(1337);
 var status = {};
 
 // routing
+app.use('/public', express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
