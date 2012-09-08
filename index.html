@@ -4,40 +4,14 @@
         <title>melmon 0.0.1</title>
         <script src="/socket.io/socket.io.js"></script>
         <link rel="stylesheet" href="/public/css/screen.css" type="text/css" media="screen" charset="utf-8"/>
+        <script src="/public/js/melmon.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <script>
-          var socket = io.connect('http://localhost');
-          socket.on('w00t', function (data) {
-            var p = document.createElement('p');
-            p.innerHTML = data.msg;
-            document.getElementById('log').appendChild(p);
-          });
-          var send = function () {
-              socket.emit('jiha', {msg: document.forms['chat'].elements['message'].value});
-          };
-
-          (function (){
-              var r = new XMLHttpRequest();
-              r.open("GET", "status", true);
-              r.onreadystatechange = function () {
-                  if (r.readyState != 4 || r.status != 200) return; 
-                  (function (data){
-                    for(var key in data) {
-                      var p = document.createElement('p');
-                      p.innerHTML = key + ' :: ' + data[key];
-                      document.getElementById("status").appendChild(p);
-                    }
-                  })(JSON.parse(r.responseText));
-            };
-            r.send();
-          })();
-        </script>
         <form name="chat">
             <fieldset>
                 <label for="message" value="Message:" />
                 <input type="text" name="message" />
-                <input type="button" value="Send" onclick="send()" />
+                <input type="button" value="Send" name="send" />
             </fieldset>
         </form>
         <div id="log">
