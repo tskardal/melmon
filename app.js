@@ -33,17 +33,26 @@ function checkStatus(host) {
     if (parsed.protocol == 'https:') {
         mode = https;
     }
+
+    function onStatus(host, newStatus) {
+        if (status[host] !== newStatus) {
+            status[host] = newStatus;
+            io.sockets.emit('status update', { "host": host, "status": newStatus });
+        }
+    }
+
     mode.get({host: parsed.host, path: parsed.path}, function(res) {
         if (res.statusCode == 301) {
             var redirect = res.headers.location;
             console.log("redirect: " + host + " --> " + redirect);
             checkStatus(redirect);
         } else {
-            status[host] = res.statusCode;               
+            onStatus(host, res.statusCode);
         }
     }).on('error', function(e) {
         console.log("URL: " + host);
         console.log("Got error: " + e.message);
+        onStatus(host, "-");
     }); 
 }
 
