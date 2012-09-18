@@ -1,6 +1,5 @@
 todo:
 ``````````````````````````
-- get updates by websocket events
 
 complete:
 ``````````````````````````
@@ -11,3 +10,4 @@ complete:
 - add https support
 - display status in index.html
 - use Bootstrap for styling
+- get updates by websocket events
